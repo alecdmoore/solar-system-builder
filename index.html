@@ -1,11 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Solar System Estimator</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
     <script
       async
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2Scwhz4E2TQpRNarBvSAYWnos-lw0hRs&callback=initMap"
@@ -35,24 +31,97 @@
       crossorigin="anonymous"
     ></script>
     <style>
-      #map {
-        height: 80%;
-        width: 80%;
-      }
-      html,
       body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
+        background-color: #eeeeee;
+      }
+      #mapid {
+        height: 400px;
+      }
+
+      .top {
+        text-align: center;
+      }
+      .output {
+        text-align: center;
+      }
+      .button {
+        background: dodgerblue;
+        border-radius: 3px;
+        border-color: dodgerblue;
+        color: rgb(241, 241, 241);
+      }
+      .controlContainer {
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+      .slider {
+        margin-left: 3rem;
       }
     </style>
-
-    <link rel="stylesheet" href="" />
+    <title>Solar System Builder</title>
   </head>
   <body>
-    <h1>hello world</h1>
-    <div id="map"></div>
+    <div class="top">
+      <h1>Solar System Builder</h1>
+    </div>
+    <div class="controlContainer">
+      <form id="addressForm">
+        <input type="text" name="address" placeholder="Address..." />
+        <button type="submit">Enter</button>
+      </form>
+      <div>
+        <input
+          type="range"
+          min="90"
+          max="270"
+          value="180"
+          class="slider"
+          id="rotateRange"
+        />
+        <svg width="120" height="120" id="rect">
+          <rect
+            x="10"
+            y="35"
+            width="100"
+            height="50"
+            style="fill: rgb(0, 0, 255); stroke-width: 3; stroke: rgb(0, 0, 0)"
+          />
+        </svg>
+      </div>
+      <form id="nswe">
+        <label>Panel Direction:</label><br />
 
-    <script src="scripts.js" async defer></script>
+        <input type="radio" id="north" name="direction" value="north" checked />
+        <label for="north">North</label><br />
+
+        <input type="radio" id="south" name="direction" value="south" />
+        <label for="south">South</label><br />
+
+        <input type="radio" id="east" name="direction" value="east" />
+        <label for="east">East</label><br />
+
+        <input type="radio" id="west" name="direction" value="west" />
+        <label for="west">West</label><br />
+      </form>
+      <div style="display: flex; flex-direction: column">
+        <p>Click map to add solar panels</p>
+        <button id="addRemovePanelButton" style="height: 30px">
+          Click to Remove
+        </button>
+      </div>
+    </div>
+    <div id="mapid"></div>
+
+    <div id="pvwatts-output" class="output">
+      <h2 id="annual-power-output">Annual AC system output:</h2>
+      <div>
+        <canvas id="myChart"></canvas>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </div>
+    <script src="scripts.js"></script>
   </body>
 </html>
